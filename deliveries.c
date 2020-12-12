@@ -1,23 +1,23 @@
 #include <stdio.h>
 #include <string.h>
 
-//structure για δημιουργια εφημερίδων/περιοδικών
+//structure to create newspapers and magazines
 struct create{    
   char *name;
   double price;
 };
 
 struct totals{
-  int p;   //εφημεριδες
-  int m;   //περιοδικα
+  int p;   //newspapers
+  int m;   //magazines
 };
 
-//structure με πινακα για να μπουν οι τιμες της εβδομαδας
+//structure with array to input prices of the week
 struct week{          
   struct totals days[7];
 };
 
-//structure για εφημεριδες
+//structure for newspapers
 struct create news(char *name){
   struct create newso ;
   newso.name=name;
@@ -25,7 +25,7 @@ struct create news(char *name){
   return newso;
 }
 
-//structure για περιοδικα
+//structure for magazines
 struct create mag(char *name){
   struct create  mags;
   mags.name=name;
@@ -33,29 +33,29 @@ struct create mag(char *name){
   return mags;
 }
 
-//structure για να μπουν οι τιμες της εβδομάδας
+//structure to insert the distribution of the week
 struct week fillweek(){
    struct week who;
 
-  who.days[0].p = 52000;   //δευτερα
+  who.days[0].p = 52000;   //monday
   who.days[0].m = 25000;
-  who.days[1].p = 108000;  //τριτη
+  who.days[1].p = 108000;  //tuesday
   who.days[1].m = 50000;
-  who.days[2].p = 54000;    //τεταρτη
+  who.days[2].p = 54000;    //wednesday
   who.days[2].m = 50000;
-  who.days[3].p = 54000;   //πεμπτη
+  who.days[3].p = 54000;   //thursday
   who.days[3].m = 5000;
-  who.days[4].p = 108000;  //παρασκευη
+  who.days[4].p = 108000;  //friday
   who.days[4].m = 5000;
-  who.days[5].p = 216000; //σαββατο
+  who.days[5].p = 216000; //saturday
   who.days[5].m = 50000;
-  who.days[6].p = 432000;  //κυριακη
+  who.days[6].p = 432000;  //sunday
   who.days[6].m = 500000;
 
   return(who);
 }
 
-//1ο function για συνολικές διανομές
+//1st function for total distribution
 void totaldelis(struct week who){
 
   int a,i,m;
@@ -100,7 +100,7 @@ if(a==3){
 
 }
 
-//2ο function για διανομές ανα κατάστημα
+//2nd function for distrubution per shop
 void totaldelis1(struct week who){
 
   int a,i,m;
@@ -120,7 +120,7 @@ void totaldelis1(struct week who){
 
 }
 
-//3o function για διανομές ανα κατάστημα με επιλογή
+//3rd function for distribution per shop with an option
 void totaldelis2(struct week who){
 
   int a,i,m;
@@ -149,7 +149,7 @@ if (a==2){
   }
 }
 
-//4o function για διανομή ανα κατάστημα σε συγκεκριμενη ημέρα
+//4th function for distribution for specific day 
 void totaldelis3(struct week who){
 
   int a,i,m;
@@ -177,7 +177,7 @@ else if(a==2)
     printf("%d",who.days[a].m/5);
 }
 
-//5o function για διανομή ανα κατάστημα ή/και των δύο ειδών σε χ μήνες
+//5th function for distribution per shop or/and both items for X months
 void totaldelis4(struct week who){
 
   int a,i,m;
@@ -235,7 +235,7 @@ else if(a==3){
 
 }
 
-//6o function συνολικη διανομή ή/και των δύο ειδών ανά κατάστημα σε Χ μήνες σε ορισμένη μέρα
+//6th function total distribution or/and both items per shop in X months in specific day
 void totaldelis5(struct week who){
 
   int a,i,m;
@@ -289,7 +289,7 @@ void totaldelis5(struct week who){
  }
 }
 
-//7o function για να υπολογίζει το κέρδος
+//7th function to calculate profit
 void profit(struct week who,struct create newso,struct create  mags){
 
 
@@ -312,15 +312,15 @@ if(a==1){
       scanf("%d",&l);
       if(l==1){
        p=p*a;
-       //για να το γραψω προγραμματιστικα αντι να βαλω 1.50
+       // newso.price to calculate with programmer's thought instead of putting the price directly which is 1.50
        p=(p*newso.price)*0.006;  
-       printf("Total profit from papers in given months from all shops is: %.0f€",p);
+       printf("Total profit from papers in given months from all shops is: %.0fβ‚¬",p);
        }
 
     else if(l==2){
        p=(p/5)*a;
        p=(p*newso.price)*0.006;  
-       printf("Total profit from papers in given months per shop is: %.0f€",p);
+       printf("Total profit from papers in given months per shop is: %.0fβ‚¬",p);
        }   
 }
 else if(a==2){
@@ -337,13 +337,13 @@ else if(a==2){
       if(l==1){
        m=m*a;
        m=(m*mags.price)*0.006;  
-       printf("Total profit from mags in given months from all shops is: %d€",m);
+       printf("Total profit from mags in given months from all shops is: %dβ‚¬",m);
        }
 
     else if(l==2){
        m=(m/5)*a;
        m=(m*mags.price)*0.006;  
-       printf("Total profit from mags in given months per shop is: %d€",m);
+       printf("Total profit from mags in given months per shop is: %dβ‚¬",m);
        }      
 }
 else if(a==3){
@@ -365,8 +365,8 @@ else if(a==3){
        m=(m*mags.price)*0.006; 
        p=p*a;
        p=(p*newso.price)*0.006;
-       printf("Total profit from papers in given months from all shops is: %.0f€\n",p);
-       printf("Total profit from mags in given months from all shops is: %d€",m);
+       printf("Total profit from papers in given months from all shops is: %.0fβ‚¬\n",p);
+       printf("Total profit from mags in given months from all shops is: %dβ‚¬",m);
        }
 
     else if(l==2){
@@ -374,8 +374,8 @@ else if(a==3){
        m=(m*mags.price)*0.006;
        p=(p/5)*a;
        p=(p*newso.price)*0.006;  
-       printf("Total profit from papers in given months per shop is: %.0f€\n",p);  
-       printf("Total profit from mags in given months per shop is: %d€",m);
+       printf("Total profit from papers in given months per shop is: %.0fβ‚¬\n",p);  
+       printf("Total profit from mags in given months per shop is: %dβ‚¬",m);
        }        
 
   }
@@ -383,7 +383,7 @@ else if(a==3){
 
 
 int main() {
-  struct create Pontiki = news("Το Ποντίκι");
+  struct create Pontiki = news("Γ”Γ― ΓΓ―Γ­Γ΄ΓΓªΓ©");
   struct create Documento = news("Documento");
   struct create Lifo = news("Lifo");
   struct create Espresso = news("Espresso");
